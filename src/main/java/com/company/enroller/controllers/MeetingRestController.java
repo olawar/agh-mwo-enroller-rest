@@ -55,7 +55,7 @@ public class MeetingRestController {
 		Meeting meeting = meetingService.findById(id);
 		Participant participant = participantService.findByLogin(login);
 		if (meeting == null || participant == null) {
-			return new ResponseEntity<Meeting>(meeting, HttpStatus.NOT_FOUND);
+			return new ResponseEntity("Unable to update. A meeting with id " + id + " does not exist.", HttpStatus.NOT_FOUND);
 		} 
 		meetingService.addParticipant(id, participant);	
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
@@ -66,7 +66,7 @@ public class MeetingRestController {
 		Meeting meeting = meetingService.findById(id);
 		Participant participant = participantService.findByLogin(login);
 		if (meeting == null || participant == null) {
-			return new ResponseEntity<Meeting>(meeting, HttpStatus.NOT_FOUND);
+			return new ResponseEntity("Unable to delete", HttpStatus.NOT_FOUND);
 		} 
 		meetingService.removeParticipant(id, participant);	
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);

@@ -36,7 +36,7 @@ public class MeetingService {
 	}
 	
 	public void addParticipant(Long id, Participant participant) {
-		Meeting meeting =  this.findById(id);
+		Meeting meeting = findById(id);
 		meeting.addParticipant(participant);
 		Transaction transaction = connector.getSession().beginTransaction();
 		connector.getSession().update(meeting);
@@ -45,7 +45,7 @@ public class MeetingService {
 	}
 	
 	public void removeParticipant(Long id, Participant participant) {
-		Meeting meeting =  this.findById(id);
+		Meeting meeting = findById(id);
 		meeting.removeParticipant(participant);
 		Transaction transaction = connector.getSession().beginTransaction();
 		connector.getSession().update(meeting);
