@@ -39,7 +39,8 @@ public class ParticipantService {
 	}
 	
 	public void update(String login, Participant participant) {	
-		Participant participantToUpdate = this.findByLogin(participant.getLogin());
+		Participant participantToUpdate = this.findByLogin(login);
+		participantToUpdate.setLogin(participant.getLogin());
 		participantToUpdate.setPassword(participant.getPassword());
 		Transaction transaction = connector.getSession().beginTransaction();
 		connector.getSession().update(participantToUpdate);
