@@ -1,6 +1,11 @@
 package com.company.enroller.persistence;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
+
+import com.company.enroller.model.Participant;
 
 public class DatabaseConnector {
 
@@ -27,6 +32,6 @@ public class DatabaseConnector {
 
 	public Session getSession() {
 		return session;
-	}
+	}	
 
 }

@@ -2,6 +2,7 @@ package com.company.enroller.persistence;
 
 import java.util.Collection;
 
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 
 import com.company.enroller.model.Participant;
@@ -17,6 +18,32 @@ public class ParticipantService {
 
 	public Collection<Participant> getAll() {
 		return connector.getSession().createCriteria(Participant.class).list();
+	}
+	
+	public Participant findByLogin(String login) {
+		return (Participant) connector.getSession().get(Participant.class, login);
+	}
+	
+	public void create(Participant participant) {		
+		Transaction transaction = connector.getSession().beginTransaction();
+		connector.getSession().save(participant);
+//		connector.getSession().flush(); // troubleshooting
+		transaction.commit();
+	}
+	
+	public void delete(Participant participant) {	
+		Participant participantToDelete = (Participant) connector.getSession().get(Participant.class, participant.getLogin());
+		Transaction transaction = connector.getSession().beginTransaction();
+		connector.getSession().delete(participantToDelete);
+		transaction.commit();
+	}
+	
+	public void update(String login, Participant participant) {	
+		Participant participantToUpdate = (Participant) connector.getSession().get(Participant.class, login);
+		participantToUpdate.setPassword(participant.getPassword());
+		Transaction transaction = connector.getSession().beginTransaction();
+		connector.getSession().update(participantToUpdate);
+		transaction.commit();
 	}
 
 }
