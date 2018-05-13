@@ -34,5 +34,22 @@ public class MeetingService {
 //		connector.getSession().flush(); // troubleshooting
 		transaction.commit();
 	}
-
+	
+	public void addParticipant(Long id, Participant participant) {
+		Meeting meeting =  this.findById(id);
+		meeting.addParticipant(participant);
+		Transaction transaction = connector.getSession().beginTransaction();
+		connector.getSession().update(meeting);
+//		connector.getSession().flush(); // troubleshooting
+		transaction.commit();
+	}
+	
+	public void removeParticipant(Long id, Participant participant) {
+		Meeting meeting =  this.findById(id);
+		meeting.removeParticipant(participant);
+		Transaction transaction = connector.getSession().beginTransaction();
+		connector.getSession().update(meeting);
+//		connector.getSession().flush(); // troubleshooting
+		transaction.commit();
+	}
 }

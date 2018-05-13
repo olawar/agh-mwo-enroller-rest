@@ -32,14 +32,14 @@ public class ParticipantService {
 	}
 	
 	public void delete(Participant participant) {	
-		Participant participantToDelete = (Participant) connector.getSession().get(Participant.class, participant.getLogin());
+		Participant participantToDelete = this.findByLogin(participant.getLogin());
 		Transaction transaction = connector.getSession().beginTransaction();
 		connector.getSession().delete(participantToDelete);
 		transaction.commit();
 	}
 	
 	public void update(String login, Participant participant) {	
-		Participant participantToUpdate = (Participant) connector.getSession().get(Participant.class, login);
+		Participant participantToUpdate = this.findByLogin(participant.getLogin());
 		participantToUpdate.setPassword(participant.getPassword());
 		Transaction transaction = connector.getSession().beginTransaction();
 		connector.getSession().update(participantToUpdate);
