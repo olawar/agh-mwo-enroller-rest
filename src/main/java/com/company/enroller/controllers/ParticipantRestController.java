@@ -52,7 +52,7 @@ public class ParticipantRestController {
 			 participantService.delete(participant);	
 			 return new ResponseEntity<Participant>(participant, HttpStatus.NO_CONTENT);
 		 }	
-		 return new ResponseEntity("Unable to delete. A participant with login " + login + " does not exist.", HttpStatus.CONFLICT);
+		 return new ResponseEntity("Unable to delete. A participant with login " + login + " does not exist.", HttpStatus.NOT_FOUND);
 	 }
 	 
 	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -61,7 +61,7 @@ public class ParticipantRestController {
 			 participantService.update(login, participant);	
 			 return new ResponseEntity<Participant>(participant, HttpStatus.OK);
 		 }	
-		 return new ResponseEntity("Unable to update. A participant with login " + login + " does not exist.", HttpStatus.NO_CONTENT);
+		 return new ResponseEntity("Unable to update. A participant with login " + login + " does not exist.", HttpStatus.NOT_FOUND);
 	 }
 
 
