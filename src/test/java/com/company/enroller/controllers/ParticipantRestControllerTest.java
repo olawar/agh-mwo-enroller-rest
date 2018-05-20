@@ -96,7 +96,7 @@ public class ParticipantRestControllerTest {
 		participant.setLogin("testlogin");
 		participant.setPassword("testpassword");
 		
-		given(participantService.findByLogin("testlogin")).willReturn(null);
+		given(participantService.findByLogin("testlogin")).willReturn((Participant) null); // linijka opcjonalna, mock domyślnie zwraca null
 
 		mvc.perform(post("/participants")
 				.contentType(MediaType.APPLICATION_JSON)
